@@ -46,7 +46,8 @@ public class Matrix {
         // create the summed matrix of the correct size
         
        
-       summed[row][col] = m1[row][col] + m2[row][col]
+       //summed[row][col] = m1[row][col] + m2[row][col];
+        return new int[0][0];
        
     }
     
@@ -55,6 +56,7 @@ public class Matrix {
     // ASSERT: the returned array is also the same size as m1 and m2
     public int[][] subtract(int[][] m1, int[][] m2) {
         
+        return new int[0][0];
         
         
     }

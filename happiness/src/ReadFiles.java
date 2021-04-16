@@ -2,18 +2,18 @@ import java.util.Scanner;
 import java.io.*;
 
 public class ReadFiles {
-	private String[][] tdata; 	// text data
-	private double[][] ndata;	// numeric data
-	private String infn;
-	private String outfn;
+    private String[][] tdata;   // text data
+    private double[][] ndata;   // numeric data
+    private String infn;
+    private String outfn;
     private final int MAX_STRINGS = 1;
     private final int MAX_NUMBERS = 10;
 
-	public ReadFiles(String infn, String outfn) throws IOException {
-		this.infn = infn;
-		this.outfn = outfn;
-		initData();
-	}
+    public ReadFiles(String infn, String outfn) throws IOException {
+        this.infn = infn;
+        this.outfn = outfn;
+        initData();
+    }
 
     public String[][] getTextData() {
         return tdata;
@@ -23,16 +23,16 @@ public class ReadFiles {
         return ndata;
     }
 
-	public static void main(String[] args) 
-		throws IOException {
-		if (args.length != 2 || args[0] == null || args[1] == null) {
-			System.out.println("Warning: you must include the input and output file names");
-			System.exit(0);
-		}
-		String in_fn = args[0];
-		String out_fn= args[1];
-		ReadFiles reader = new ReadFiles(in_fn, out_fn);
-	}
+    public static void main(String[] args) 
+        throws IOException {
+        if (args.length != 2 || args[0] == null || args[1] == null) {
+            System.out.println("Warning: you must include the input and output file names");
+            System.exit(0);
+        }
+        String in_fn = args[0];
+        String out_fn= args[1];
+        ReadFiles reader = new ReadFiles(in_fn, out_fn);
+    }
 
     // note: this also counts the header line...
     private int countLines(FileReader r, boolean show) {
@@ -55,20 +55,20 @@ public class ReadFiles {
 
     // use if interested
     private void showHeaderRow(String header) {
-		String[] headers = header.split(",", -1);
+        String[] headers = header.split(",", -1);
         System.out.println("headers.length == " + headers.length);
-		for (int i = 0; i < headers.length; i++) {
+        for (int i = 0; i < headers.length; i++) {
             System.out.print(headers[i].length() + " :: ");
-			if (headers[i] == null) {
-				System.out.println("null");
-			} else if (headers[i].isEmpty()) {
-				System.out.println("isEmpty");
-			} else if (headers[i].length() == 0) {
-				System.out.println("lengthIsZero");
-			} else {
-				System.out.println(headers[i]);
-			}
-		}
+            if (headers[i] == null) {
+                System.out.println("null");
+            } else if (headers[i].isEmpty()) {
+                System.out.println("isEmpty");
+            } else if (headers[i].length() == 0) {
+                System.out.println("lengthIsZero");
+            } else {
+                System.out.println(headers[i]);
+            }
+        }
     }
 
     // def of valid row of data is that all cells have some data in them, no empty data cells allowed for now
@@ -87,15 +87,15 @@ public class ReadFiles {
     }
 
     // populate the member multidimensional arrays with all valid data
-	private void initData() throws IOException {
+    private void initData() throws IOException {
 
-		final int lineCount = countLines(new FileReader(infn), false);
+        final int lineCount = countLines(new FileReader(infn), false);
 
-		FileReader fin = new FileReader(infn);
-		Scanner src = new Scanner(fin); 
-		src.useDelimiter(", *"); 
+        FileReader fin = new FileReader(infn);
+        Scanner src = new Scanner(fin); 
+        src.useDelimiter(", *"); 
 
-		String headerLine = src.nextLine(); // strip off header line an move cursor into first line of real data
+        String headerLine = src.nextLine(); // strip off header line an move cursor into first line of real data
         //showHeaderRow(headerLine); // use if you want to see column headers
 
         int curRow = 0;
@@ -104,33 +104,33 @@ public class ReadFiles {
         String[][] ta = new String[lineCount][MAX_STRINGS];;
         double[][] da = new double[lineCount][MAX_NUMBERS];
 
-		while(src.hasNextLine() && curRow < lineCount) { 
+        while(src.hasNextLine() && curRow < lineCount) { 
 
-			String raw = src.nextLine();
-			String[] data = raw.split(",", -1);
+            String raw = src.nextLine();
+            String[] data = raw.split(",", -1);
 
-			boolean validRow = isAllDataValid(data);
+            boolean validRow = isAllDataValid(data);
             if (validRow) {
                 validCount++;
             } else {
                 invalidCount++;
             }
 
-			// if row of data has no missing values, fill the arrays proplerly
-			if (validRow) {
+            // if row of data has no missing values, fill the arrays proplerly
+            if (validRow) {
                 int curRowIdx = 0;
-				for (int i = 0; i < data.length; i++) {
-					if (i == 0) {
-						ta[curRow][0] = data[0];
-					} else {
-						da[curRow][curRowIdx] = Double.parseDouble(data[i]);
+                for (int i = 0; i < data.length; i++) {
+                    if (i == 0) {
+                        ta[curRow][0] = data[0];
+                    } else {
+                        da[curRow][curRowIdx] = Double.parseDouble(data[i]);
                         curRowIdx++;
-					}
-				}
+                    }
+                }
                 curRow++;
-			}
+            }
 
-		}
+        }
 
         int newRowSize = lineCount - invalidCount - 1; // minus one to not count the header row :)
         tdata = cleanTextArray(ta, newRowSize);
@@ -138,8 +138,8 @@ public class ReadFiles {
         showTextData(tdata);
         showNumData(ndata);
  
-		fin.close(); 
-	}
+        fin.close(); 
+    }
 
     // remove the last invalidCount rows in a and return a new array
     // note: [][]a contains null or zero filled rows based at bottom of array due to the invalidRow count
