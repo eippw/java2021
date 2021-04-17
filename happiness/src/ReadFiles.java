@@ -35,14 +35,13 @@ public class ReadFiles {
     }
 
     // note: this also counts the header line...
-    private int countLines(FileReader r, boolean show) {
+    private int countLines(boolean show) {
         try {
-            BufferedReader reader = new BufferedReader(r);
+            BufferedReader reader = new BufferedReader(new FileReader(infn));
             int lines = 0;
             while (reader.readLine() != null) 
                 lines++;
             reader.close();
-            r.close();
             if (show) {
                 System.out.println("lines = " + lines);
             }
@@ -71,11 +70,12 @@ public class ReadFiles {
         }
     }
 
-    // def of valid row of data is that all cells have some data in them, no empty data cells allowed for now
+    // A valid row of data is: all cells have some data, no empty data cells allowed for now
     private boolean isAllDataValid(String[] data) {
         boolean isValid = false;
         boolean notDone = true;
         for (int i = 0; i < data.length && notDone; i++) {
+            // sanity check overkill :)
             if (data[i] != null && !data[i].isEmpty() && data[i].length() != 0 && !data[i].equals("")) {
                 isValid = true;
             } else  {
@@ -86,16 +86,22 @@ public class ReadFiles {
         return isValid;
     }
 
+    // TODO: Jake: build another version that uses Arrays and/or ArrayLists with either
+    //       String data, or a custom Class to represent the data
+    //       Goal for you is to only loop through the file once and then process with
+    //       the list you create
+    //
     // populate the member multidimensional arrays with all valid data
     private void initData() throws IOException {
 
-        final int lineCount = countLines(new FileReader(infn), false);
+        final int lineCount = countLines(false);
 
         FileReader fin = new FileReader(infn);
         Scanner src = new Scanner(fin); 
         src.useDelimiter(", *"); 
 
-        String headerLine = src.nextLine(); // strip off header line an move cursor into first line of real data
+        // strip off header line an move cursor into first line of real data
+        String headerLine = src.nextLine(); 
         //showHeaderRow(headerLine); // use if you want to see column headers
 
         int curRow = 0;
@@ -132,13 +138,14 @@ public class ReadFiles {
 
         }
 
+        fin.close(); 
+
         int newRowSize = lineCount - invalidCount - 1; // minus one to not count the header row :)
         tdata = cleanTextArray(ta, newRowSize);
         ndata = cleanNumArray(da, newRowSize);
         showTextData(tdata);
         showNumData(ndata);
  
-        fin.close(); 
     }
 
     // remove the last invalidCount rows in a and return a new array
