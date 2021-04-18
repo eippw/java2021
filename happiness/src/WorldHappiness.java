@@ -38,7 +38,7 @@ public class WorldHappiness implements DataSet {
         return headers;
     }
 
-    // note: this also counts the header line...
+    // Retrun a count of all lines, including the header line
     private int countLines(boolean show) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(infn));
@@ -56,7 +56,8 @@ public class WorldHappiness implements DataSet {
         }
     }
 
-    // use if interested
+    // Popluate the column header array and if show is true, display column headers
+    // PRE: header is the first row of data from the input file
     private void showHeaderRow(String header, boolean show) {
         headers = header.split(",", -1);
         if (show)
@@ -95,7 +96,7 @@ public class WorldHappiness implements DataSet {
         return isValid;
     }
 
-    // TODO: Jake: build another version that uses Arrays and/or ArrayLists with either
+    // TODO: jaketwigs: build another version that uses Arrays and/or ArrayLists with either
     //       String data, or a custom Class to represent the data
     //       Goal for you is to only loop through the file once and then process with
     //       the list you create
