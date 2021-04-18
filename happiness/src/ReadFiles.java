@@ -1,5 +1,7 @@
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Scanner;
-import java.io.*;
 
 public class ReadFiles {
     private String[][] tdata;   // text data
@@ -21,17 +23,6 @@ public class ReadFiles {
 
     public double[][] getNumData() {
         return ndata;
-    }
-
-    public static void main(String[] args) 
-        throws IOException {
-        if (args.length != 2 || args[0] == null || args[1] == null) {
-            System.out.println("Warning: you must include the input and output file names");
-            System.exit(0);
-        }
-        String in_fn = args[0];
-        String out_fn= args[1];
-        ReadFiles reader = new ReadFiles(in_fn, out_fn);
     }
 
     // note: this also counts the header line...
