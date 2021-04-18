@@ -1,6 +1,6 @@
 ## Universal code base for the B-P Class of 2021
 
-##### Class Members
+### Class Members
 
 | username     | nickname |
 | ------------- | ------------- |
