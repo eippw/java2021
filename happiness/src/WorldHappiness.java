@@ -58,25 +58,18 @@ public class WorldHappiness implements DataSet {
 
     // Popluate the column header array and if show is true, display column headers
     // PRE: header is the first row of data from the input file
-    private void showHeaderRow(String header, boolean show) {
-        headers = header.split(",", -1);
-        if (show)
-            System.out.println("headers.length == " + headers.length);
+    private void showHeaderRow() {
+        System.out.println("headers.length == " + headers.length);
         for (int i = 0; i < headers.length; i++) {
-            if (show)
-                System.out.print(headers[i].length() + " :: ");
+            System.out.print(headers[i].length() + " :: ");
             if (headers[i] == null) {
-                if (show)
-                    System.out.println("null");
+                System.out.println("null");
             } else if (headers[i].isEmpty()) {
-                if (show)
-                    System.out.println("isEmpty");
+                System.out.println("isEmpty");
             } else if (headers[i].length() == 0) {
-                if (show)
-                    System.out.println("lengthIsZero");
+                System.out.println("lengthIsZero");
             } else {
-                if (show)
-                    System.out.println(headers[i]);
+                System.out.println(headers[i]);
             }
         }
     }
@@ -112,8 +105,10 @@ public class WorldHappiness implements DataSet {
         src.useDelimiter(", *"); 
 
         // strip off header line an move cursor into first line of real data
-        String headerLine = src.nextLine(); 
-        showHeaderRow(headerLine, false); // pass true if you really want to see column names 
+        String header = src.nextLine(); 
+        headers = header.split(",", -1);
+
+        //showHeaderRow(); // call if interested 
 
         int curRow = 0;
         int invalidCount = 0;
