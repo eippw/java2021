@@ -1,8 +1,6 @@
-# B-P Java 2020-2021
+## Universal code base for the B-P Class of 2021
 
-## Universal code base for the Class of 2021
-
-### Class Members
+##### Class Members
 
 | username     | nickname |
 | ------------- | ------------- |
