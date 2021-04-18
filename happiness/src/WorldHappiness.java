@@ -1,17 +1,26 @@
+/**
+ * This program will read the data from the world-happiness-report.csv 
+ * and move the data into several different multidimensional arrays that 
+ * we will work with to analyze the data provided.
+ *
+ */
+
+
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ReadFiles {
+public class WorldHappiness implements DataSet {
     private String[][] tdata;   // text data
     private double[][] ndata;   // numeric data
+    private String[] headers;     // column headers/names
     private String infn;
     private String outfn;
     private final int MAX_STRINGS = 1;
     private final int MAX_NUMBERS = 10;
 
-    public ReadFiles(String infn, String outfn) throws IOException {
+    public WorldHappiness(String infn, String outfn) throws IOException {
         this.infn = infn;
         this.outfn = outfn;
         initData();
@@ -23,6 +32,10 @@ public class ReadFiles {
 
     public double[][] getNumData() {
         return ndata;
+    }
+
+    public String[] getHeaders() {
+        return headers;
     }
 
     // note: this also counts the header line...
@@ -44,19 +57,24 @@ public class ReadFiles {
     }
 
     // use if interested
-    private void showHeaderRow(String header) {
-        String[] headers = header.split(",", -1);
-        System.out.println("headers.length == " + headers.length);
+    private void showHeaderRow(String header, boolean show) {
+        headers = header.split(",", -1);
+        if (show)
+            System.out.println("headers.length == " + headers.length);
         for (int i = 0; i < headers.length; i++) {
             System.out.print(headers[i].length() + " :: ");
             if (headers[i] == null) {
-                System.out.println("null");
+                if (show)
+                    System.out.println("null");
             } else if (headers[i].isEmpty()) {
-                System.out.println("isEmpty");
+                if (show)
+                    System.out.println("isEmpty");
             } else if (headers[i].length() == 0) {
-                System.out.println("lengthIsZero");
+                if (show)
+                    System.out.println("lengthIsZero");
             } else {
-                System.out.println(headers[i]);
+                if (show)
+                    System.out.println(headers[i]);
             }
         }
     }
@@ -93,7 +111,7 @@ public class ReadFiles {
 
         // strip off header line an move cursor into first line of real data
         String headerLine = src.nextLine(); 
-        //showHeaderRow(headerLine); // use if you want to see column headers
+        showHeaderRow(headerLine, true); // pass true if you really want to see column names 
 
         int curRow = 0;
         int invalidCount = 0;
@@ -134,8 +152,8 @@ public class ReadFiles {
         int newRowSize = lineCount - invalidCount - 1; // minus one to not count the header row :)
         tdata = cleanTextArray(ta, newRowSize);
         ndata = cleanNumArray(da, newRowSize);
-        showTextData(tdata);
-        showNumData(ndata);
+        //showTextData(tdata);
+        //showNumData(ndata);
  
     }
 
@@ -181,6 +199,10 @@ public class ReadFiles {
             }
             System.out.println();
         }
+    }
+
+    public void describe() {
+        
     }
 
 }

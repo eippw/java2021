@@ -1,5 +1,5 @@
 import java.io.IOException;
-public class ReadTester {
+public class HappinessTester {
 
     public static void main(String[] args) throws IOException {
         if (args.length != 2 || args[0] == null || args[1] == null) {
@@ -9,9 +9,14 @@ public class ReadTester {
         }
         String in_fn = args[0];
         String out_fn= args[1];
-        ReadFiles reader = new ReadFiles(in_fn, out_fn);
-        String[][] tdata = reader.getTextData();
-        double[][] ndata = reader.getNumData();
+        WorldHappiness happyData = new WorldHappiness(in_fn, out_fn);
+        String[][] tdata = happyData.getTextData();
+        double[][] ndata = happyData.getNumData();
+        String[] headers = happyData.getHeaders();
+        Matrix helper = new Matrix();
+        helper.print(headers);
+        helper.print(tdata);
+        helper.print(ndata);
     }
 
 }

@@ -1,4 +1,23 @@
 public class Matrix {
+
+    public void print(String[][] data) {
+        for (int row = 0; row < data.length; row++) {
+            for (int col = 0; col < data[0].length; col++) {
+                System.out.print("[" + row + "][" + col + "] " + data[row][col] + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    public void print(double[][] data) {
+        for (int row = 0; row < data.length; row++) {
+            for (int col = 0; col < data[0].length; col++) {
+                System.out.print("[" + row + "][" + col + "] " + data[row][col] + "\t");
+            }
+            System.out.println();
+        }
+    }
+
     
     public void print(int[][] md) {
         for (int[] row : md) {
@@ -7,6 +26,14 @@ public class Matrix {
             }
             System.out.println();
         }
+    }
+
+    public void print(String[] a) {
+
+        for(int i = 0; i < a.length; i++) {
+            System.out.println("[" + i + "] \t" + a[i]);
+        }
+
     }
     
     // TODO: return the to sum of all rows
