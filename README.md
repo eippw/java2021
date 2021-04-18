@@ -3,16 +3,13 @@
 ## Universal code base for the Class of 2021
 
 ### Class Members
-        --> Simon\
-   --> Cam\
-21dervini       --> Ivy\
-billyice        --> Billy\
-chriscorcuera   --> Chris\
-jaketwigs       --> Jake\
-eippw           --> Eipp
 
-
-| user name     | nick name |
+| username     | nickname |
 | ------------- | ------------- |
 | Simon546      | Simon  |
 |  CamPolikowski  | Cam  |
+| 21derwini | Ivy |
+| billyice | Billy |
+| chriscorcuera | Chris |
+| jaketwigs | Jake |
+| eippw | William |
