@@ -63,7 +63,8 @@ public class WorldHappiness implements DataSet {
         if (show)
             System.out.println("headers.length == " + headers.length);
         for (int i = 0; i < headers.length; i++) {
-            System.out.print(headers[i].length() + " :: ");
+            if (show)
+                System.out.print(headers[i].length() + " :: ");
             if (headers[i] == null) {
                 if (show)
                     System.out.println("null");
@@ -112,7 +113,7 @@ public class WorldHappiness implements DataSet {
 
         // strip off header line an move cursor into first line of real data
         String headerLine = src.nextLine(); 
-        showHeaderRow(headerLine, true); // pass true if you really want to see column names 
+        showHeaderRow(headerLine, false); // pass true if you really want to see column names 
 
         int curRow = 0;
         int invalidCount = 0;
@@ -202,6 +203,7 @@ public class WorldHappiness implements DataSet {
         }
     }
 
+    // TODO:
     public void describe() {
         
     }
