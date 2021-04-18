@@ -1,9 +1,9 @@
 # B-P Java 2020-2021
 
-Universal code base for the Class of 2021
+##Universal code base for the Class of 2021
 -
 
-GitHub class members who are participating:
+###Class Members
 -
 Simon546        --> Simon\
 CamPolikowski   --> Cam\
