@@ -16,13 +16,17 @@ public class HappinessTester {
         String[][] tdata = happyData.getTextData();
         double[][] ndata = happyData.getNumData();
         String[] headers = happyData.getHeaders();
+        
+        
+        
+        
 
         Matrix helper = new Matrix();
         helper.print(headers);
         helper.print(tdata);
         helper.print(ndata);
         
-        
+        System.out.println("Connor's schnozz");
     }
 
 }
