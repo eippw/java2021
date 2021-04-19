@@ -12,3 +12,4 @@
 | jaketwigs | Jake |
 | eippw | William |
 | 21phillipsn | Nate |
+| Kade-G | Kade |
