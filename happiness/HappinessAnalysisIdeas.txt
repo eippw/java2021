@@ -18,7 +18,7 @@ NOT IN ANY PARTICULAR ORDER
 
 7. Nate: I would also be interested to calculate the average values for each column. 
 
-9. Chris:
+9. Chris:We could find out what country's are the happiest and which country's are the least happy and rank them from happiest to non-happiest.
 
 10. Jake: 
 
