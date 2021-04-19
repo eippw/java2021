@@ -1,0 +1,47 @@
+World Happiness Decomposition Document
+
+
+Analysis Title: Rank each countries Logged GDP per capita based on the years
+
+Description: On the chart Afghansitan has years 2008 - 2019, we will take the decimals from their GDP and rank them from greatest to least.
+
+Data Columns:
+Columns 1 and 4
+Rows: all
+
+Data Structructures Required:
+Arrays
+
+Mathematical Formulas:
+We will need variables to hold the rank of each year. We will need count variables to tell us which country we are testing. We will need to use if and for statements to loop through all the years.
+
+
+Sample Report:
+
+Country name and year
+GDP score (greatest to least)
+Afghanistan 2013
+7.725
+Afghanistan  2014
+7.718
+Afghanistan 2012
+7.705
+Afghanistan 2015
+7.702
+Afghanistan 2016
+7.697
+Afghanistan 2017
+7.697
+Afghanistan 2019
+7.697
+Afghanistan 2018
+7.692
+Afghanistan 2010
+7.647
+Afghanistan 2011
+7.620
+Afghanistan 2009
+7.540
+Afghanistan 2008
+7.370
+
