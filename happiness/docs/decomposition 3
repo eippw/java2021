@@ -1,0 +1,27 @@
+World Happiness Decomposition Document
+
+Teacher: Daddy ICE Eipp
+
+Analysis Title: Happiness Ranking from least to greatest for 2021 dataset
+
+Description: We will be using the ladder column to rank the order of happiness from least to greatest. This will help us organize the countries and see which are the least happy to the most happy in the year 2021.
+
+Data Columns: 
+Columns: 1 and 3
+Rows: all
+
+Data Structructures Required: Multidimensional Arrays
+
+Mathematical Formulas: 
+
+To calculate the “happiness ranking score: we …
+
+
+
+Sample Report:
+Denmark: 7.620
+Switzerland: 7.571
+Finland: 7.842
+
+
+ 
