@@ -1,0 +1,24 @@
+World Happiness Decomposition Document
+Nate
+Simon
+Daddy T
+Swag Daddy “the hustler” gucci guwop big steppa Polikowski
+
+Analysis Title: Ranking countries happiness from greatest to least
+
+Description: We will be using the ladder column to rank the order of happiness from greatest to least. This will help us organize the countries and see which are the least happy to the most happy in the year 2021
+
+Data Columns: We will need to use columns 1 which is the list of countries and 3 which is the life ladder and is the country’s happiness rating as it pertains to the happiness of each country. By using these columns we will be able to successfully rank each country in terms of happiness.
+
+Data Structructures Required:
+Multidimensional Arrays
+
+Mathematical Formulas:
+We will need a variable that holds the rank of each country. We need a nested for-loop that individually checks each country and then a temporary array that compiles a list of each country from greatest to least. We will also need a count variable to keep track of what country we are testing and what number the country is in the list. We will need to assign countries to numbers, which is where the multidimensional array will come into play as it will need to be stored.
+
+Sample Report:
+Australia 
+7.234
+Armenia 
+5.488
+
