@@ -199,27 +199,27 @@ public class WorldHappiness implements DataSet {
         }
     }
 
-    // TODO:
+    // TODO: last method we will build. No description at this time of the project
     public void describe() {
         
     }
     
+
     /**
      * PRE: tdata has been populated
      * @return an array with all the distinct country name in it appearing
      * exactly once
      */
     public String[] getCountries() {
-        // count of distinct countries
-        int dc = 1; // start at 1 for last row to be added at the end
+        int count = 1; // start at 1 for last row to be added at the end
         String curName = tdata[0][0];
         for (int row = 1; row < tdata.length; row++) {
            if (!tdata[row - 1][0].equals(tdata[row][0])) {
-               dc++;
+               count++;
            } 
         }
         
-        String[] distinct = new String[dc];
+        String[] distinct = new String[count];
         int distinctIndex = 0;
         for (int row = 1; row < tdata.length; row++) {
            if (!tdata[row - 1][0].equals(tdata[row][0])) {
@@ -229,9 +229,7 @@ public class WorldHappiness implements DataSet {
            } 
         }
         distinct[distinct.length-1] = tdata[tdata.length-1][0];
-        
         return distinct;
-        
     }
     
     
@@ -249,7 +247,7 @@ public class WorldHappiness implements DataSet {
     
     // TODO
     /**
-     * get a count of how many rows have countryName in tdata
+     * Get a count of how many rows have the country name in tdata
      * @param countryName The name of the country to get a count of 
      * @return the number of rows where the country name shows up
      */
@@ -259,7 +257,7 @@ public class WorldHappiness implements DataSet {
     
     // TODO
     /**
-     * get a the starting index where the country names first shows up
+     * Get the starting index where the country name first shows up in tdata
      * @param countryName The name of the country to find the starting index for
      * @return the starting index or -1 if no starting index could be found
      */
