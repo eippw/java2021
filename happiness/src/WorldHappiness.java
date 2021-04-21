@@ -199,9 +199,70 @@ public class WorldHappiness implements DataSet {
         }
     }
 
-    // TODO:
+    // TODO: last method we will build. No description at this time of the project
     public void describe() {
         
     }
+    
 
+    /**
+     * PRE: tdata has been populated
+     * @return an array with all the distinct country name in it appearing
+     * exactly once
+     */
+    public String[] getCountries() {
+        int count = 1; // start at 1 for last row to be added at the end
+        String curName = tdata[0][0];
+        for (int row = 1; row < tdata.length; row++) {
+           if (!tdata[row - 1][0].equals(tdata[row][0])) {
+               count++;
+           } 
+        }
+        
+        String[] distinct = new String[count];
+        int distinctIndex = 0;
+        for (int row = 1; row < tdata.length; row++) {
+           if (!tdata[row - 1][0].equals(tdata[row][0])) {
+               //System.out.println("debug: " + countries[row][0]);
+               distinct[distinctIndex] = tdata[row-1][0];
+               distinctIndex++;
+           } 
+        }
+        distinct[distinct.length-1] = tdata[tdata.length-1][0];
+        return distinct;
+    }
+    
+    
+    // TODO
+    /**
+     * Return the mean value for the Ladder column data for a particular 
+     * country
+     * @param countryName The name of the country to get the mean Ladder score of
+     * @reutun the average of the Ladder scores for a coutry or -1 if the country count is 0
+     */
+    public double getCountryMeanLadder(String countryName) {
+        return 0.0;
+    }
+    
+    
+    // TODO
+    /**
+     * Get a count of how many rows have the country name in tdata
+     * @param countryName The name of the country to get a count of 
+     * @return the number of rows where the country name shows up
+     */
+    public int getCount(String countryName) {
+        return 0;
+    }
+    
+    // TODO
+    /**
+     * Get the starting index where the country name first shows up in tdata
+     * @param countryName The name of the country to find the starting index for
+     * @return the starting index or -1 if no starting index could be found
+     */
+    public int getStartIndex(String countryName) {
+        return 0;
+    }
+        
 }
