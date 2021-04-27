@@ -2,9 +2,7 @@ import java.util.*;
 import java.io.IOException;
 public class HappyTestChris2 {
 
-
     public static void main(String[] args) throws IOException {
-
 
         if (args.length != 2 || args[0] == null || args[1] == null) {
             System.out.println("Warning: you must include the input and output file names");
@@ -15,27 +13,44 @@ public class HappyTestChris2 {
 
         String in_fn = args[0]; // input filename
         String out_fn= args[1]; // output report filename
-
-
-        WorldHappiness happyData = new WorldHappiness(in_fn, out_fn);
+        
+        WorldHappinessChris2 happyData = new WorldHappinessChris2(in_fn, out_fn);
         String[][] tdata = happyData.getTextData();
         double[][] ndata = happyData.getNumData();
-        String[] headers = happyData.getHeaders();
+        String[] headers = happyData.getHeaders(); 
+        
+        Matrix helper = new Matrix();
+        helper.print(headers);
+        //helper.print(tdata);
+        //helper.print(ndata);
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a country name: ");
+        String countryName = scanner.nextLine();
+        
+        
+        int count = happyData.getCount(countryName);
+        int startIndex = happyData.getStartIndex(countryName);
+        double meanLadder = happyData.getCountryMeanLadder(countryName);
 
 
-      // ADD YOUR CODE HERE AND USE THE tdata, ndata matrices to calculate your averages
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the name of a country");
-        String country = scan.nextLine();
-        int count = 0;
-        double a = 0;
-        for(int i = 0; i < tdata.length; i++){
-            if(tdata[i][0].equals(country)){
-                a += ndata[1][2];
-                count++;
-            }
+        System.out.println("Count: " + count);
+        System.out.println("Start index is: " + startIndex);
+        System.out.println("Mean ladder score for " + countryName + " is " + meanLadder);
+
+        System.out.print("Would you like to see all countries Y/n: ");
+        String y_n = scanner.nextLine();
+        if (y_n.substring(0,1).equalsIgnoreCase("n")) {
+            System.exit(0);
         }
-        System.out.println("Average: " + (a/count));
+        
+        // bonus
+        String[] allCountries = happyData.getCountries();
+        for (int i = 0; i < allCountries.length; i++) {
+            double mean = happyData.getCountryMeanLadder(allCountries[i]);
+            System.out.printf("The mean Ladder score for %s is %.4f\n",allCountries[i], mean);
+        }
+
 
     }
 

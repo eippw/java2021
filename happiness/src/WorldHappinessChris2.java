@@ -1,16 +1,18 @@
 /**
- * This program will read the data from the world-happiness-report.csv 
- * and move the data into several different multidimensional arrays that 
+ * This program will read the data from the world-happiness-report.csv
+ * and move the data into several different multidimensional arrays that
  * we will work with to analyze the data provided.
  *
  */
+
 
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class WorldHappinessJake implements DataSet {
+
+public class WorldHappinessChris2 implements DataSet {
     private String[][] tdata;   // text data
     private double[][] ndata;   // numeric data
     private String[] headers;     // column headers/names
@@ -19,7 +21,7 @@ public class WorldHappinessJake implements DataSet {
     private final int MAX_STRINGS = 1;
     private final int MAX_NUMBERS = 10;
 
-    public WorldHappinessJake(String infn, String outfn) throws IOException {
+    public WorldHappinessChris2(String infn, String outfn) throws IOException {
         this.infn = infn;
         this.outfn = outfn;
         initData();
@@ -42,7 +44,7 @@ public class WorldHappinessJake implements DataSet {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(infn));
             int lines = 0;
-            while (reader.readLine() != null) 
+            while (reader.readLine() != null)
                 lines++;
             reader.close();
             if (show) {
@@ -101,22 +103,22 @@ public class WorldHappinessJake implements DataSet {
         final int lineCount = countLines(false);
 
         FileReader fin = new FileReader(infn);
-        Scanner src = new Scanner(fin); 
-        src.useDelimiter(", *"); 
+        Scanner src = new Scanner(fin);
+        src.useDelimiter(", *");
 
         // strip off header line an move cursor into first line of real data
-        String header = src.nextLine(); 
+        String header = src.nextLine();
         headers = header.split(",", -1);
 
-        //showHeaderRow(); // call if interested 
+        //showHeaderRow(); // call if interested
 
         int curRow = 0;
         int invalidCount = 0;
         int validCount = 0;
-        String[][] ta = new String[lineCount][MAX_STRINGS];
+        String[][] ta = new String[lineCount][MAX_STRINGS];;
         double[][] da = new double[lineCount][MAX_NUMBERS];
 
-        while(src.hasNextLine() && curRow < lineCount) { 
+        while(src.hasNextLine() && curRow < lineCount) {
 
             String raw = src.nextLine();
             String[] data = raw.split(",", -1);
@@ -144,7 +146,7 @@ public class WorldHappinessJake implements DataSet {
 
         }
 
-        fin.close(); 
+        fin.close();
 
         int newRowSize = lineCount - invalidCount - 1; // minus one to not count the header row :)
         tdata = cleanTextArray(ta, newRowSize);
@@ -200,9 +202,9 @@ public class WorldHappinessJake implements DataSet {
 
     // TODO: last method we will build. No description at this time of the project
     public void describe() {
-        
+       
     }
-    
+   
 
     /**
      * PRE: tdata has been populated
@@ -215,9 +217,9 @@ public class WorldHappinessJake implements DataSet {
         for (int row = 1; row < tdata.length; row++) {
            if (!tdata[row - 1][0].equals(tdata[row][0])) {
                count++;
-           } 
+           }
         }
-        
+       
         String[] distinct = new String[count];
         int distinctIndex = 0;
         for (int row = 1; row < tdata.length; row++) {
@@ -225,35 +227,53 @@ public class WorldHappinessJake implements DataSet {
                //System.out.println("debug: " + countries[row][0]);
                distinct[distinctIndex] = tdata[row-1][0];
                distinctIndex++;
-           } 
+           }
         }
         distinct[distinct.length-1] = tdata[tdata.length-1][0];
         return distinct;
     }
-    
-    
+   
+   
     // TODO
     /**
-     * Return the mean value for the Ladder column data for a particular 
+     * Return the mean value for the Ladder column data for a particular
      * country
      * @param countryName The name of the country to get the mean Ladder score of
      * @reutun the average of the Ladder scores for a coutry or -1 if the country count is 0
      */
     public double getCountryMeanLadder(String countryName) {
-        return 0.0;
+        int count = getCount(countryName);
+        int startindex = getStartIndex(countryName);
+        double ladderSum = 0;
+        for (int i = startindex; i < (startindex + count); i++) {
+            //System.out.println("ladder score: " + ndata[i][2]);
+            ladderSum += ndata[i][2];
+        }
+        
+        double average = ladderSum / (double)count;
+        return average;
+  
     }
-    
-    
+   
+   
     // TODO
     /**
      * Get a count of how many rows have the country name in tdata
-     * @param countryName The name of the country to get a count of 
+     * @param countryName The name of the country to get a count of
      * @return the number of rows where the country name shows up
      */
     public int getCount(String countryName) {
-        return 0;
+        int count = 0;
+        for(int i = 0; i < tdata.length; i++){
+            if(tdata[i][0].equalsIgnoreCase(countryName)){
+                count++;
+            }
+        }
+        return count;
     }
-    
+
+
+   
     // TODO
     /**
      * Get the starting index where the country name first shows up in tdata
@@ -261,7 +281,18 @@ public class WorldHappinessJake implements DataSet {
      * @return the starting index or -1 if no starting index could be found
      */
     public int getStartIndex(String countryName) {
-        return 0;
+       
+        int startindex = -1;
+        for(int r = 0; r < tdata.length;r++){
+            if(tdata[r][0].equalsIgnoreCase(countryName)){
+                startindex = r;
+                return startindex;
+            }
+        }
+        return startindex;
+       
+       
     }
-        
 }
+   
+     

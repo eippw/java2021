@@ -36,15 +36,12 @@ public class HappinessTester {
         System.out.printf("The mean Ladder score for %s is %.4f\n",countryName, meanLadder);
         
         
-        
         // bonus
-        /*
         String[] allCountries = happyData.getCountries();
         for (int i = 0; i < allCountries.length; i++) {
             double mean = happyData.getCountryMeanLadder(allCountries[i]);
             System.out.printf("The mean Ladder score for %s is %.4f\n",allCountries[i], mean);
         }
-        */
         
     }
 

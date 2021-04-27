@@ -5,12 +5,13 @@
  *
  */
 
+
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class WorldHappinessJake implements DataSet {
+public class WorldHappinessSimon2 implements DataSet {
     private String[][] tdata;   // text data
     private double[][] ndata;   // numeric data
     private String[] headers;     // column headers/names
@@ -19,7 +20,7 @@ public class WorldHappinessJake implements DataSet {
     private final int MAX_STRINGS = 1;
     private final int MAX_NUMBERS = 10;
 
-    public WorldHappinessJake(String infn, String outfn) throws IOException {
+    public WorldHappinessSimon2(String infn, String outfn) throws IOException {
         this.infn = infn;
         this.outfn = outfn;
         initData();
@@ -113,7 +114,7 @@ public class WorldHappinessJake implements DataSet {
         int curRow = 0;
         int invalidCount = 0;
         int validCount = 0;
-        String[][] ta = new String[lineCount][MAX_STRINGS];
+        String[][] ta = new String[lineCount][MAX_STRINGS];;
         double[][] da = new double[lineCount][MAX_NUMBERS];
 
         while(src.hasNextLine() && curRow < lineCount) { 
@@ -237,10 +238,24 @@ public class WorldHappinessJake implements DataSet {
      * Return the mean value for the Ladder column data for a particular 
      * country
      * @param countryName The name of the country to get the mean Ladder score of
-     * @reutun the average of the Ladder scores for a coutry or -1 if the country count is 0
+     * @return the average of the Ladder scores for a coutry or -1 if the country count is 0
      */
     public double getCountryMeanLadder(String countryName) {
-        return 0.0;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter name of desired country: ");
+        String country = scan.nextLine();
+        int count = 0;
+        double ave = 0;
+        for (int i = 0; i < tdata.length; i++) {
+            if (tdata[i][0].equals(country)) {
+              ave += ndata[i][2];
+              count++;
+            } 
+            if (count == 0) {
+                return -1;
+            }
+        }
+        return(ave / count);
     }
     
     
@@ -251,7 +266,13 @@ public class WorldHappinessJake implements DataSet {
      * @return the number of rows where the country name shows up
      */
     public int getCount(String countryName) {
-        return 0;
+        int count = 0;
+        for (int i = 0; i < tdata.length; i++) {
+            if (tdata[i][0].equals(countryName)) {
+                count++;
+            }
+        }
+        return count;
     }
     
     // TODO
@@ -261,7 +282,13 @@ public class WorldHappinessJake implements DataSet {
      * @return the starting index or -1 if no starting index could be found
      */
     public int getStartIndex(String countryName) {
-        return 0;
+        for (int i = 0; i < tdata.length; i++) {
+            if (tdata[i][0].equals(countryName)) {
+                return i;
+            } else {
+                return -1;
+            }
+        }
+        return -1;
     }
-        
 }

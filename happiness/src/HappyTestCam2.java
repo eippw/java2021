@@ -15,7 +15,7 @@ public class HappyTestCam2 {
         String in_fn = args[0]; // input filename
         String out_fn= args[1]; // output report filename
 
-        WorldHappiness happyData = new WorldHappiness(in_fn, out_fn);
+        WorldHappinessCam2 happyData = new WorldHappinessCam2(in_fn, out_fn);
         String[][] tdata = happyData.getTextData();
         double[][] ndata = happyData.getNumData();
         String[] headers = happyData.getHeaders();
@@ -34,26 +34,19 @@ public class HappyTestCam2 {
         
         
         
-        // get a count of how many rows have countryName in tdata
-        // also find index of the starting row
-        int count = 0;
-        int startIndex = -1;
-        boolean foundStart = false;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a country name: ");
+        String countryName = scanner.nextLine();
         
-        for (int r = 0; r < tdata.length; r++){
-            for (int c = 0; c < tdata[0].length; c++){
-                if (tdata[r][c].equalsIgnoreCase(countryName) && foundStart == false){
-                    // ASSERT: found the first row w the proper country, now record row and count
-                    foundStart = true;
-                    count++;
-                    startIndex = r;
-                } else if (tdata[r][c].equalsIgnoreCase(countryName)){
-                    count++;
-                }
-            }
-        }
+        int count = happyData.getCount(countryName);
+        int startIndex = happyData.getStartIndex(countryName);
+        //double meanLadder = happyData.getCountryMeanLadder(countryName);
         
-        System.out.println("Found " + count + " matching ");
+        System.out.println("Found " + count + " rows for " + countryName);
+        System.out.println("The starting row index for " + countryName + " is: " + startIndex);
+       // System.out.printf("The mean Ladder score for %s is %.4f\n",countryName, meanLadder);
+        
+        
         
         double sum = 0;
         int maxLength = startIndex + count;
