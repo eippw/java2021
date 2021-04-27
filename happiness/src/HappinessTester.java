@@ -48,6 +48,14 @@ public class HappinessTester {
             System.out.printf("The mean Ladder score for %s is %.4f\n",allCountries[i], mean);
         }
         
+        // TODO:
+        // ask the user if they want to see the happiest country and 
+        // the most unhappy country. If yes, print out the country with the
+        // greatest mean ladder score and and the least mean ladder score
+        
+        
+        // TODO: ??? We will make this up 4/27
+        
     }
 
 }
