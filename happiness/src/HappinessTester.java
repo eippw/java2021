@@ -36,6 +36,11 @@ public class HappinessTester {
         System.out.printf("The mean Ladder score for %s is %.4f\n",countryName, meanLadder);
         
         
+        // TODO:
+        // add code to ask the user if they want to see all the data 
+        // from all the counties. If they do, the bonus section of code should
+        // execute
+        
         // bonus
         String[] allCountries = happyData.getCountries();
         for (int i = 0; i < allCountries.length; i++) {

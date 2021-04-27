@@ -1,6 +1,6 @@
 /**
- * This program will read the data from the world-happiness-report.csv
- * and move the data into several different multidimensional arrays that
+ * This program will read the data from the world-happiness-report.csv 
+ * and move the data into several different multidimensional arrays that 
  * we will work with to analyze the data provided.
  *
  */
@@ -11,8 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-
-public class WorldHappinessChris2 implements DataSet {
+public class WorldHappinessEipp implements DataSet {
     private String[][] tdata;   // text data
     private double[][] ndata;   // numeric data
     private String[] headers;     // column headers/names
@@ -21,7 +20,7 @@ public class WorldHappinessChris2 implements DataSet {
     private final int MAX_STRINGS = 1;
     private final int MAX_NUMBERS = 10;
 
-    public WorldHappinessChris2(String infn, String outfn) throws IOException {
+    public WorldHappinessEipp(String infn, String outfn) throws IOException {
         this.infn = infn;
         this.outfn = outfn;
         initData();
@@ -44,7 +43,7 @@ public class WorldHappinessChris2 implements DataSet {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(infn));
             int lines = 0;
-            while (reader.readLine() != null)
+            while (reader.readLine() != null) 
                 lines++;
             reader.close();
             if (show) {
@@ -103,14 +102,14 @@ public class WorldHappinessChris2 implements DataSet {
         final int lineCount = countLines(false);
 
         FileReader fin = new FileReader(infn);
-        Scanner src = new Scanner(fin);
-        src.useDelimiter(", *");
+        Scanner src = new Scanner(fin); 
+        src.useDelimiter(", *"); 
 
         // strip off header line an move cursor into first line of real data
-        String header = src.nextLine();
+        String header = src.nextLine(); 
         headers = header.split(",", -1);
 
-        //showHeaderRow(); // call if interested
+        //showHeaderRow(); // call if interested 
 
         int curRow = 0;
         int invalidCount = 0;
@@ -118,7 +117,7 @@ public class WorldHappinessChris2 implements DataSet {
         String[][] ta = new String[lineCount][MAX_STRINGS];;
         double[][] da = new double[lineCount][MAX_NUMBERS];
 
-        while(src.hasNextLine() && curRow < lineCount) {
+        while(src.hasNextLine() && curRow < lineCount) { 
 
             String raw = src.nextLine();
             String[] data = raw.split(",", -1);
@@ -146,7 +145,7 @@ public class WorldHappinessChris2 implements DataSet {
 
         }
 
-        fin.close();
+        fin.close(); 
 
         int newRowSize = lineCount - invalidCount - 1; // minus one to not count the header row :)
         tdata = cleanTextArray(ta, newRowSize);
@@ -200,99 +199,98 @@ public class WorldHappinessChris2 implements DataSet {
         }
     }
 
-    // TODO: last method we will build. No description at this time of the project
+    // TODO:
     public void describe() {
-       
+        
     }
-   
-
+    
     /**
      * PRE: tdata has been populated
      * @return an array with all the distinct country name in it appearing
      * exactly once
      */
     public String[] getCountries() {
-        int count = 1; // start at 1 for last row to be added at the end
+        // count of distinct countries
+        int dc = 1; // start at 1 for last row to be added at the end
         String curName = tdata[0][0];
         for (int row = 1; row < tdata.length; row++) {
            if (!tdata[row - 1][0].equals(tdata[row][0])) {
-               count++;
-           }
+               dc++;
+           } 
         }
-       
-        String[] distinct = new String[count];
+        
+        String[] distinct = new String[dc];
         int distinctIndex = 0;
         for (int row = 1; row < tdata.length; row++) {
            if (!tdata[row - 1][0].equals(tdata[row][0])) {
                //System.out.println("debug: " + countries[row][0]);
                distinct[distinctIndex] = tdata[row-1][0];
                distinctIndex++;
-           }
+           } 
         }
         distinct[distinct.length-1] = tdata[tdata.length-1][0];
+        
         return distinct;
+        
     }
-   
-   
-    // TODO
+    
     /**
-     * Return the mean value for the Ladder column data for a particular
+     * Return the mean value for the Ladder column data for a particular 
      * country
      * @param countryName The name of the country to get the mean Ladder score of
      * @reutun the average of the Ladder scores for a coutry or -1 if the country count is 0
      */
     public double getCountryMeanLadder(String countryName) {
         int count = getCount(countryName);
-        int startindex = getStartIndex(countryName);
-        double ladderSum = 0;
-        for (int i = startindex; i < (startindex + count); i++) {
-            //System.out.println("ladder score: " + ndata[i][2]);
-            ladderSum += ndata[i][2];
+        int startIndex = getStartIndex(countryName);
+        double totalLadder = 0;
+        for (int row = startIndex; row < startIndex + count; row++) {
+            double score = ndata[row][2];
+            // System.out.println("Ladder Score: " + score);
+            totalLadder += ndata[row][2];
         }
-        
-        double average = ladderSum / (double)count;
-        return average;
-  
+        if (count == 0) {
+            return -1;
+        }
+        double mean = totalLadder / (double)count;
+        return mean;
     }
-   
-   
-    // TODO
+    
+    
     /**
-     * Get a count of how many rows have the country name in tdata
-     * @param countryName The name of the country to get a count of
+     * get a count of how many rows have countryName in tdata
+     * @param countryName The name of the country to get a count of 
      * @return the number of rows where the country name shows up
      */
     public int getCount(String countryName) {
         int count = 0;
-        for(int i = 0; i < tdata.length; i++){
-            if(tdata[i][0].equalsIgnoreCase(countryName)){
-                count++;
+        for (int r = 0; r < tdata.length; r++) {
+            for (int c = 0; c < tdata[0].length; c++) {
+                if (tdata[r][c].equalsIgnoreCase(countryName)) {
+                    count++;
+                }
             }
         }
         return count;
     }
-
-
-   
-    // TODO
+    
     /**
-     * Get the starting index where the country name first shows up in tdata
+     * get a the starting index where the country names first shows up
      * @param countryName The name of the country to find the starting index for
      * @return the starting index or -1 if no starting index could be found
      */
     public int getStartIndex(String countryName) {
-       
-        int startindex = -1;
-        for(int r = 0; r < tdata.length;r++){
-            if(tdata[r][0].equalsIgnoreCase(countryName)){
-                startindex = r;
-                return startindex;
+        // get the index of the starting row of first occurance of countryName
+        for (int r = 0; r < tdata.length; r++) {
+            for (int c = 0; c < tdata[0].length; c++) {
+                if (tdata[r][c].equalsIgnoreCase(countryName)) {
+                    // ASSERT: found the first row so that is the
+                    //         starting index
+                    return r;
+                }
             }
         }
-        return startindex;
-       
-       
+        return -1; // if here we did not find a starting row index
     }
+        
 }
-   
-     
