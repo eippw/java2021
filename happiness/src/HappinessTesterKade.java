@@ -1,0 +1,113 @@
+import java.io.IOException;
+import java.util.Scanner;
+public class HappinessTesterKade {
+
+
+    public static void main(String[] args) throws IOException {
+
+
+        if (args.length != 2 || args[0] == null || args[1] == null) {
+            System.out.println("Warning: you must include the input and output file names");
+            System.out.println("Example: java HappinessTester ../data/world-happiness-report.csv out.txt");
+            System.exit(0);
+        }
+
+
+        String in_fn = args[0]; // input filename
+        String out_fn= args[1]; // output report filename
+
+
+        WorldHappinessKade2 happyData = new WorldHappinessKade2(in_fn, out_fn);
+        String[][] tdata = happyData.getTextData();
+        double[][] ndata = happyData.getNumData();
+        String[] headers = happyData.getHeaders();
+
+        Matrix helper = new Matrix();
+        //helper.print(headers);
+        //helper.print(tdata);
+        //helper.print(ndata);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a country name: ");
+        String countryName = scanner.nextLine();
+        
+        int count = happyData.getCount(countryName);
+        int startIndex = happyData.getStartIndex(countryName);
+        double meanLadder = happyData.getCountryMeanLadder(countryName);
+        double meanLife = happyData.getCountryMeanLifeExpectancy(countryName);
+        double meanCorrupt = happyData.getCountryMeanCorruptionPerception(countryName);
+        
+        System.out.println("Found " + count + " rows for " + countryName);
+        System.out.println("The starting row index for " + countryName + " is: " + startIndex);
+        System.out.printf("The mean Ladder score for %s is %.4f\n",countryName, meanLadder);
+        System.out.printf("The mean Life Expectancy is %.4f\n",meanLife);
+        System.out.printf("The mean Corruption Perception is %.4f\n",meanCorrupt);
+        
+        System.out.println("Do you want to see all countries?");
+        String yes = scanner.nextLine();
+        
+        if (yes.equalsIgnoreCase("yes")) {
+            String[] allCountries = happyData.getCountries();
+                for (int i = 0; i < allCountries.length; i++) {
+                double mean = happyData.getCountryMeanLadder(allCountries[i]);
+                System.out.printf("The mean Ladder score for %s is %.4f\n",allCountries[i], mean);
+                }
+        } else {
+            
+        
+            
+        // TODO:
+        // ask the user if they want to see the happiest country and 
+        // the most unhappy country based on the mean Ladder Score. 
+        // If yes, print out the country with the greatest mean ladder score 
+        // and the country with the lowest mean ladder score
+
+        System.out.println("Do you want to see what country is the happiest and which is the unhappiest?");
+        String yes2 = scanner.nextLine();
+        
+        if (yes2.equalsIgnoreCase("yes")) {
+            String[] allCountries = happyData.getCountries();
+            double happiest = 0.0;
+            double unhappiest = 10.0;
+            int happy1 = 0;
+            int unhappy1 = 0;
+            String happiestC = "";
+            String unhappiestC = "";
+            
+            for (int i = 0; i < allCountries.length; i++) {
+                double happyMean = happyData.getCountryMeanLadder(allCountries[i]);
+                if (happyMean > happiest) {
+                    happiest = happyMean;
+                    happy1 = i;
+                }
+                if (happyMean < unhappiest) {
+                    unhappiest = happyMean;
+                    unhappy1 = i;
+                }
+            }
+        
+        happiestC = allCountries[happy1];
+        unhappiestC = allCountries[unhappy1];
+        
+        System.out.println("The happiest country is " + happiestC + " and their ladder score is " + happiest);
+        System.out.println("The unhappiest country is " + unhappiestC + " and their ladder score is " + unhappiest);   
+            
+            
+            
+        }
+        }
+        
+       
+       
+       
+       
+       
+       
+       
+        }
+        
+        
+        
+    }
+
+
