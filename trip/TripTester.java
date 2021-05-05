@@ -15,13 +15,13 @@ public class TripTester {
       Time arr = new Time(1,15, true);
       Flight f1 = new Flight(dep, arr);
       flightList.add(f1);
-      //Create a trip
+      //Create a Trip
       
-      //call the getDuration method for testing and print results
+      //call the Trip getDuration method for testing and print results
       
-      //call the getLongestLeg method for testing and print results
+      //call the Trip getLongestLeg method for testing and print results
       
-      //call the getShortestLayover method for testing and print results
+      //call the Trip getShortestLayover method for testing and print results
       
    }
 }

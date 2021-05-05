@@ -22,6 +22,7 @@ public class Trip {
    public Trip(ArrayList<Flight> f) {
       flights = f;
    }
+
    
    /** @return the number of minutes from the departure of the first
     *          flight to the arrival of the last flight if there are
@@ -32,6 +33,7 @@ public class Trip {
       return 0; //here so the program compiles.  
    }
 
+
    /** Precondition: the departure time for each flight is later than
     *                the arrival time of its preceding flight.
     *  @return the largest number of minutes of a single flight in the trip; 
@@ -40,6 +42,7 @@ public class Trip {
    public int getLongestLeg() {
       return 0; //here so the program compiles;
    }
+   
    
    /** Precondition: the departure time for each flight is later than
     *                the arrival time of its preceding flight.
